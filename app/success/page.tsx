@@ -91,7 +91,7 @@ export default async function SuccessPage({
             Beauty Studio
           </p>
           <h1 className="font-serif text-3xl md:text-4xl text-gray-800 tracking-wide">
-            Kateryna&apos;s Lashes
+            Kateryna&apos;s Laser &amp; Lash Salon
           </h1>
         </div>
       </header>
@@ -236,7 +236,7 @@ export default async function SuccessPage({
 
       <footer className="pb-8 text-center">
         <p className="text-gray-400 text-xs">
-          &copy; {new Date().getFullYear()} Kateryna&apos;s Lashes. All rights reserved.
+          &copy; {new Date().getFullYear()} Kateryna&apos;s Laser &amp; Lash Salon. All rights reserved.
         </p>
       </footer>
     </main>

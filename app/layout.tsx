@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Kateryna's Lashes | Book Your Appointment",
+  title: "Kateryna's Laser & Lash Salon | Book Your Appointment",
   description:
-    "Book your professional eyelash extension appointment with Kateryna. Classic and Volume sets, fills, and removals available.",
+    "Book your professional eyelash extension appointment with Kateryna's Laser & Lash Salon. Classic and Volume sets, fills, and removals available.",
   keywords: "eyelash extensions, lash artist, booking, classic lashes, volume lashes",
 };
 

@@ -1,4 +1,4 @@
-# Kateryna's Lashes — Eyelash Booking App
+# Kateryna's Laser & Lash Salon — Eyelash Booking App
 
 A production-ready eyelash booking web app built with Next.js 14, TypeScript, Tailwind CSS, Stripe Checkout, and SQLite.
 

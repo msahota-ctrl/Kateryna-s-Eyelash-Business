@@ -83,7 +83,7 @@ export default function AdminPage() {
               Beauty Studio
             </p>
             <h1 className="font-serif text-3xl text-gray-800 mb-1">
-              Kateryna&apos;s Lashes
+              Kateryna&apos;s Laser &amp; Lash Salon
             </h1>
             <p className="text-gray-500 text-sm">Admin Portal</p>
           </div>
@@ -166,7 +166,7 @@ export default function AdminPage() {
               Beauty Studio
             </p>
             <h1 className="font-serif text-2xl text-gray-800">
-              Kateryna&apos;s Lashes — Admin
+              Kateryna&apos;s Laser &amp; Lash Salon — Admin
             </h1>
           </div>
           <div className="flex items-center gap-3">
