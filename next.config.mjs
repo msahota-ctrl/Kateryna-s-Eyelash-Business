@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+
+const nextConfig = {
   // Required to allow raw body parsing for Stripe webhooks
   experimental: {},
 };
