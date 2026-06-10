@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-gray-800;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-rose-gold text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-200 hover:bg-rose-gold-dark hover:shadow-soft-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply border border-rose-gold text-rose-gold px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-200 hover:bg-rose-gold hover:text-white active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-soft border border-gray-50 p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-rose-gold/30 focus:border-rose-gold transition-all duration-200 text-sm bg-white;
+  }
+
+  .step-indicator {
+    @apply flex items-center justify-center w-8 h-8 rounded-full text-xs font-semibold transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .text-rose-gold {
+    color: #b76e79;
+  }
+
+  .bg-rose-gold {
+    background-color: #b76e79;
+  }
+
+  .border-rose-gold {
+    border-color: #b76e79;
+  }
+
+  .ring-rose-gold {
+    --tw-ring-color: #b76e79;
+  }
+}
