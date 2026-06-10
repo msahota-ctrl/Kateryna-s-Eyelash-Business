@@ -25,6 +25,17 @@ function formatTime(timeStr: string): string {
   return `${displayHour}:00 ${suffix}`;
 }
 
+const labelStyle: React.CSSProperties = {
+  fontFamily: "'Montserrat', sans-serif",
+  fontSize: "0.6rem",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase",
+  color: "#888",
+  fontWeight: 400,
+  display: "block",
+  marginBottom: "0.4rem",
+};
+
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -36,18 +47,15 @@ export default function AdminPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
       const res = await fetch("/api/admin/bookings", {
         headers: { "x-admin-password": password },
       });
-
       if (!res.ok) {
         setError("Incorrect password. Please try again.");
         setLoading(false);
         return;
       }
-
       const data = await res.json();
       setBookings(data.bookings);
       setIsAuthenticated(true);
@@ -73,29 +81,94 @@ export default function AdminPage() {
     }
   };
 
+  // ── Login screen ───────────────────────────────────────────────────────────
+
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-rose-gold-bg flex items-center justify-center px-4">
-        <div className="w-full max-w-md">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <p className="text-rose-gold text-xs tracking-[0.3em] uppercase font-medium mb-2">
+      <main
+        style={{
+          minHeight: "100vh",
+          backgroundColor: "#0A0A0A",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1rem",
+        }}
+        className="jungle-bg"
+      >
+        <div style={{ width: "100%", maxWidth: "420px" }}>
+          {/* Wordmark */}
+          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.55rem",
+                letterSpacing: "0.35em",
+                textTransform: "uppercase",
+                color: "#F4A0B5",
+                fontWeight: 400,
+                marginBottom: "0.6rem",
+              }}
+            >
               Beauty Studio
             </p>
-            <h1 className="font-serif text-3xl text-gray-800 mb-1">
-              Kateryna&apos;s Laser &amp; Lash Salon
+            <h1
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 300,
+                fontSize: "1.9rem",
+                color: "#FFFFFF",
+                letterSpacing: "0.06em",
+                marginBottom: "0.5rem",
+              }}
+            >
+              Kateryna&apos;s Laser &amp; Lash
             </h1>
-            <p className="text-gray-500 text-sm">Admin Portal</p>
+            <div
+              style={{
+                width: "30px",
+                height: "1px",
+                backgroundColor: "#F4A0B5",
+                margin: "0 auto 0.5rem",
+              }}
+            />
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.65rem",
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.35)",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+              }}
+            >
+              Admin Portal
+            </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-soft-md border border-rose-gold/10 p-8">
-            <div className="flex items-center justify-center w-14 h-14 rounded-full bg-rose-gold/10 mx-auto mb-6">
-              <svg
-                className="w-7 h-7 text-rose-gold"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+          {/* Login card */}
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              borderRadius: "2px",
+              padding: "2.5rem",
+              border: "1px solid #efefef",
+            }}
+          >
+            {/* Lock icon */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "44px",
+                height: "44px",
+                border: "1px solid #F4A0B5",
+                borderRadius: "50%",
+                margin: "0 auto 1.5rem",
+              }}
+            >
+              <svg width="18" height="18" fill="none" stroke="#F4A0B5" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -105,15 +178,23 @@ export default function AdminPage() {
               </svg>
             </div>
 
-            <h2 className="font-serif text-xl text-gray-800 text-center mb-6">
+            <h2
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 400,
+                fontSize: "1.4rem",
+                color: "#0A0A0A",
+                textAlign: "center",
+                marginBottom: "1.75rem",
+                letterSpacing: "0.03em",
+              }}
+            >
               Sign In
             </h2>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-wide font-medium mb-1.5">
-                  Password
-                </label>
+                <label style={labelStyle}>Password</label>
                 <input
                   type="password"
                   value={password}
@@ -125,23 +206,43 @@ export default function AdminPage() {
               </div>
 
               {error && (
-                <p className="text-red-500 text-sm text-center">{error}</p>
+                <p
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "0.72rem",
+                    color: "#f87171",
+                    textAlign: "center",
+                    fontWeight: 300,
+                  }}
+                >
+                  {error}
+                </p>
               )}
 
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary w-full"
+                className="btn-elegant"
+                style={{ width: "100%", opacity: loading ? 0.5 : 1 }}
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
             </form>
           </div>
 
-          <div className="text-center mt-6">
+          <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
             <Link
               href="/"
-              className="text-rose-gold text-sm hover:text-rose-gold-dark transition-colors"
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.62rem",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "rgba(244,160,181,0.6)",
+                textDecoration: "none",
+                fontWeight: 300,
+                transition: "color 0.2s ease",
+              }}
             >
               ← Back to Booking
             </Link>
@@ -151,121 +252,361 @@ export default function AdminPage() {
     );
   }
 
+  // ── Dashboard ──────────────────────────────────────────────────────────────
+
   const confirmedCount = bookings.filter((b) => b.status === "confirmed").length;
   const totalRevenue = bookings
     .filter((b) => b.status === "confirmed")
     .reduce((sum, b) => sum + b.service_price, 0);
 
   return (
-    <main className="min-h-screen bg-rose-gold-bg">
-      {/* Header */}
-      <header className="bg-white border-b border-rose-gold/10 shadow-soft">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <main style={{ minHeight: "100vh", backgroundColor: "#FDF0F4" }}>
+      {/* Black top bar */}
+      <header
+        style={{
+          backgroundColor: "#0A0A0A",
+          padding: "0 1.5rem",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: "64px",
+          }}
+        >
           <div>
-            <p className="text-rose-gold text-xs tracking-[0.3em] uppercase font-medium">
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.55rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#F4A0B5",
+                fontWeight: 400,
+              }}
+            >
               Beauty Studio
             </p>
-            <h1 className="font-serif text-2xl text-gray-800">
-              Kateryna&apos;s Laser &amp; Lash Salon — Admin
+            <h1
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 300,
+                fontSize: "1.25rem",
+                color: "#FFFFFF",
+                letterSpacing: "0.04em",
+              }}
+            >
+              Kateryna&apos;s Laser &amp; Lash — Admin
             </h1>
           </div>
-          <div className="flex items-center gap-3">
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <button
               onClick={handleRefresh}
               disabled={loading}
-              className="btn-outline text-xs px-4 py-2"
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.6rem",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                backgroundColor: "transparent",
+                color: "#F4A0B5",
+                border: "1px solid rgba(244,160,181,0.4)",
+                padding: "0.45rem 1rem",
+                borderRadius: "2px",
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.5 : 1,
+                transition: "all 0.2s ease",
+              }}
             >
               {loading ? "Refreshing..." : "Refresh"}
             </button>
-            <Link href="/" className="text-gray-500 text-sm hover:text-rose-gold transition-colors">
+            <Link
+              href="/"
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.6rem",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.4)",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+              }}
+            >
               ← Back to Site
             </Link>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-2xl shadow-soft p-6 border border-rose-gold/10">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">Total Bookings</p>
-            <p className="font-serif text-3xl text-gray-800 mt-1">{bookings.length}</p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-soft p-6 border border-rose-gold/10">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">Confirmed</p>
-            <p className="font-serif text-3xl text-gray-800 mt-1">{confirmedCount}</p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-soft p-6 border border-rose-gold/10">
-            <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">Total Revenue</p>
-            <p className="font-serif text-3xl text-rose-gold mt-1">${totalRevenue}</p>
-          </div>
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "2.5rem 1.5rem",
+        }}
+      >
+        {/* Stat cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "1rem",
+            marginBottom: "2.5rem",
+          }}
+        >
+          {[
+            { label: "Total Bookings", value: bookings.length, color: "#0A0A0A" },
+            { label: "Confirmed", value: confirmedCount, color: "#0A0A0A" },
+            { label: "Total Revenue", value: `$${totalRevenue}`, color: "#F4A0B5" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              style={{
+                backgroundColor: "#FFFFFF",
+                border: "1px solid #efefef",
+                borderRadius: "2px",
+                padding: "1.5rem 1.75rem",
+                borderTop: "2px solid #F4A0B5",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: "0.58rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "#bbb",
+                  fontWeight: 400,
+                  marginBottom: "0.5rem",
+                }}
+              >
+                {stat.label}
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontWeight: 400,
+                  fontSize: "2.25rem",
+                  color: stat.color,
+                  lineHeight: 1,
+                }}
+              >
+                {stat.value}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* Table */}
-        <div className="bg-white rounded-2xl shadow-soft border border-rose-gold/10 overflow-hidden">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="font-serif text-xl text-gray-800">All Bookings</h2>
+        {/* Bookings table */}
+        <div
+          style={{
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #efefef",
+            borderRadius: "2px",
+            overflow: "hidden",
+          }}
+        >
+          {/* Table header row */}
+          <div
+            style={{
+              padding: "1.25rem 1.75rem",
+              borderBottom: "1px solid #f5f5f5",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 400,
+                fontSize: "1.25rem",
+                color: "#0A0A0A",
+                letterSpacing: "0.03em",
+              }}
+            >
+              All Bookings
+            </h2>
+            <span
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.65rem",
+                color: "#bbb",
+                fontWeight: 300,
+                letterSpacing: "0.06em",
+              }}
+            >
+              {bookings.length} {bookings.length === 1 ? "record" : "records"}
+            </span>
           </div>
 
           {bookings.length === 0 ? (
-            <div className="p-12 text-center">
-              <p className="text-gray-400">No bookings yet.</p>
+            <div style={{ padding: "4rem", textAlign: "center" }}>
+              <p
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: 300,
+                  fontSize: "0.82rem",
+                  color: "#ccc",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                No bookings yet.
+              </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
                 <thead>
-                  <tr className="bg-rose-gold-bg">
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Client
-                    </th>
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Service
-                    </th>
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Date & Time
-                    </th>
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Price
-                    </th>
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Status
-                    </th>
-                    <th className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wide font-medium">
-                      Booked At
-                    </th>
+                  <tr style={{ backgroundColor: "#FDF0F4" }}>
+                    {["Client", "Service", "Date & Time", "Price", "Status", "Booked At"].map((h) => (
+                      <th
+                        key={h}
+                        style={{
+                          textAlign: "left",
+                          padding: "0.75rem 1.25rem",
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: "0.58rem",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: "#aaa",
+                          fontWeight: 400,
+                          borderBottom: "1px solid #f0f0f0",
+                        }}
+                      >
+                        {h}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody>
                   {bookings.map((booking) => (
-                    <tr key={booking.id} className="hover:bg-rose-gold-bg/50 transition-colors">
-                      <td className="px-4 py-4">
-                        <p className="font-medium text-gray-800">{booking.client_name}</p>
-                        <p className="text-gray-400 text-xs mt-0.5">{booking.client_email}</p>
-                        <p className="text-gray-400 text-xs">{booking.client_phone}</p>
+                    <tr
+                      key={booking.id}
+                      style={{ borderBottom: "1px solid #fafafa", transition: "background-color 0.15s ease" }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLTableRowElement).style.backgroundColor = "#FDF0F4";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLTableRowElement).style.backgroundColor = "transparent";
+                      }}
+                    >
+                      <td style={{ padding: "1rem 1.25rem" }}>
+                        <p
+                          style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 500,
+                            fontSize: "0.8rem",
+                            color: "#0A0A0A",
+                          }}
+                        >
+                          {booking.client_name}
+                        </p>
+                        <p
+                          style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 300,
+                            fontSize: "0.68rem",
+                            color: "#aaa",
+                            marginTop: "0.15rem",
+                          }}
+                        >
+                          {booking.client_email}
+                        </p>
+                        <p
+                          style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 300,
+                            fontSize: "0.68rem",
+                            color: "#aaa",
+                          }}
+                        >
+                          {booking.client_phone}
+                        </p>
                       </td>
-                      <td className="px-4 py-4 text-gray-700">{booking.service_name}</td>
-                      <td className="px-4 py-4">
-                        <p className="text-gray-800">{booking.appointment_date}</p>
-                        <p className="text-gray-400 text-xs mt-0.5">
+                      <td
+                        style={{
+                          padding: "1rem 1.25rem",
+                          fontFamily: "'Cormorant Garamond', Georgia, serif",
+                          fontSize: "0.95rem",
+                          color: "#333",
+                          fontWeight: 400,
+                        }}
+                      >
+                        {booking.service_name}
+                      </td>
+                      <td style={{ padding: "1rem 1.25rem" }}>
+                        <p
+                          style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: "0.75rem",
+                            color: "#0A0A0A",
+                            fontWeight: 400,
+                          }}
+                        >
+                          {booking.appointment_date}
+                        </p>
+                        <p
+                          style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: "0.68rem",
+                            color: "#aaa",
+                            fontWeight: 300,
+                            marginTop: "0.15rem",
+                          }}
+                        >
                           {formatTime(booking.appointment_time)}
                         </p>
                       </td>
-                      <td className="px-4 py-4 text-gray-800 font-medium">
+                      <td
+                        style={{
+                          padding: "1rem 1.25rem",
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: "0.8rem",
+                          fontWeight: 500,
+                          color: "#F4A0B5",
+                        }}
+                      >
                         ${booking.service_price}
                       </td>
-                      <td className="px-4 py-4">
+                      <td style={{ padding: "1rem 1.25rem" }}>
                         <span
-                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
-                            booking.status === "confirmed"
-                              ? "bg-green-50 text-green-700"
-                              : "bg-yellow-50 text-yellow-700"
-                          }`}
+                          style={{
+                            display: "inline-block",
+                            padding: "0.25rem 0.75rem",
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: "0.58rem",
+                            letterSpacing: "0.1em",
+                            textTransform: "uppercase",
+                            fontWeight: 500,
+                            borderRadius: "999px",
+                            backgroundColor:
+                              booking.status === "confirmed" ? "#0A0A0A" : "#FDF0F4",
+                            color:
+                              booking.status === "confirmed" ? "#FFFFFF" : "#F4A0B5",
+                            border:
+                              booking.status === "confirmed"
+                                ? "1px solid #0A0A0A"
+                                : "1px solid #F4A0B5",
+                          }}
                         >
                           {booking.status}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-gray-400 text-xs">
+                      <td
+                        style={{
+                          padding: "1rem 1.25rem",
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: "0.68rem",
+                          color: "#bbb",
+                          fontWeight: 300,
+                        }}
+                      >
                         {new Date(booking.created_at).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",

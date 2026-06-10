@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,56 +6,195 @@
 
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-white text-gray-800;
+    background-color: #FDF0F4;
+    color: #0A0A0A;
+    font-weight: 300;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  * {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 }
 
 @layer components {
+  /* ── Jungle background ── */
+  .jungle-bg {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900'%3E%3C!-- Top-left monstera leaf --%3E%3Cpath d='M-40,20 C20,10 80,60 60,130 C50,165 20,175 0,160 C-10,152 -5,140 10,135 C30,128 45,115 40,95 C35,75 10,68 -10,78 C-30,88 -50,80 -40,20Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cpath d='M30,0 C90,-10 150,40 130,120 C115,175 75,195 45,178 C25,167 28,148 50,140 C75,130 95,112 88,85 C80,58 50,48 25,60 C0,72 -20,55 30,0Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cpath d='M-20,80 C40,55 110,90 105,170 C100,225 60,248 28,232 C5,220 8,198 32,188 C60,176 82,155 75,125 C68,95 35,85 10,98 C-15,111 -60,105 -20,80Z' fill='%231a1a1a' opacity='0.07'/%3E%3C!-- Monstera holes --%3E%3Cellipse cx='55' cy='90' rx='8' ry='12' fill='%23FDF0F4' opacity='0.9'/%3E%3Cellipse cx='75' cy='130' rx='7' ry='10' fill='%23FDF0F4' opacity='0.9'/%3E%3C!-- Top-left palm frond sweeping right --%3E%3Cpath d='M0,0 Q120,80 280,40 Q320,30 350,10' stroke='%231a1a1a' stroke-width='3' fill='none' opacity='0.06'/%3E%3Cpath d='M0,15 Q100,100 260,70 Q310,58 345,38' stroke='%231a1a1a' stroke-width='2' fill='none' opacity='0.05'/%3E%3Cpath d='M0,35 Q80,120 230,105 Q285,98 325,78' stroke='%231a1a1a' stroke-width='2.5' fill='none' opacity='0.05'/%3E%3C!-- Top-right corner leaves --%3E%3Cpath d='M1480,10 C1410,0 1360,55 1385,130 C1398,170 1430,182 1455,168 C1470,158 1465,143 1445,138 C1422,131 1405,115 1412,92 C1419,68 1448,60 1468,72 C1488,84 1510,72 1480,10Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cpath d='M1510,50 C1440,35 1385,98 1408,178 C1422,225 1462,242 1492,226 C1512,215 1508,194 1485,185 C1458,174 1438,152 1446,122 C1454,92 1485,83 1508,96 C1530,108 1550,90 1510,50Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cellipse cx='1430' cy='110' rx='8' ry='13' fill='%23FDF0F4' opacity='0.9'/%3E%3Cellipse cx='1455' cy='155' rx='7' ry='10' fill='%23FDF0F4' opacity='0.9'/%3E%3C!-- Top-right palm frond sweeping left --%3E%3Cpath d='M1440,0 Q1320,85 1160,45 Q1110,32 1080,12' stroke='%231a1a1a' stroke-width='3' fill='none' opacity='0.06'/%3E%3Cpath d='M1440,20 Q1330,105 1175,75 Q1120,62 1092,42' stroke='%231a1a1a' stroke-width='2' fill='none' opacity='0.05'/%3E%3C!-- Bottom-left large monstera --%3E%3Cpath d='M-50,820 C30,790 110,830 100,920 C94,960 60,980 30,965 C8,953 12,930 38,920 C68,908 90,885 82,855 C74,825 38,815 12,830 C-14,845 -80,835 -50,820Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cpath d='M20,860 C100,830 185,875 172,975 C164,1020 120,1040 85,1022 C60,1008 65,982 95,970 C130,956 155,930 145,895 C135,860 95,850 65,866 C35,882 -40,868 20,860Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cellipse cx='72' cy='900' rx='9' ry='13' fill='%23FDF0F4' opacity='0.9'/%3E%3C!-- Bottom-left palm frond --%3E%3Cpath d='M0,900 Q130,820 290,860 Q340,872 375,892' stroke='%231a1a1a' stroke-width='3' fill='none' opacity='0.06'/%3E%3Cpath d='M0,880 Q110,800 265,845 Q318,858 356,880' stroke='%231a1a1a' stroke-width='2' fill='none' opacity='0.05'/%3E%3C!-- Bottom-right leaves --%3E%3Cpath d='M1490,870 C1415,845 1362,895 1390,978 C1405,1018 1442,1032 1468,1016 C1486,1004 1480,982 1458,972 C1432,960 1415,937 1424,908 C1433,879 1464,872 1486,886 C1508,900 1528,882 1490,870Z' fill='%231a1a1a' opacity='0.07'/%3E%3Cpath d='M1440,900 Q1305,815 1145,858 Q1095,870 1062,892' stroke='%231a1a1a' stroke-width='3' fill='none' opacity='0.06'/%3E%3C!-- Panther silhouette — prowling right, center-right area, lower third --%3E%3Cg opacity='0.07' fill='%231a1a1a'%3E%3C!-- Body --%3E%3Cellipse cx='1050' cy='680' rx='115' ry='38' transform='rotate(-8 1050 680)'/%3E%3C!-- Head --%3E%3Cellipse cx='1152' cy='648' rx='32' ry='26' transform='rotate(-5 1152 648)'/%3E%3C!-- Snout --%3E%3Cellipse cx='1178' cy='656' rx='14' ry='10' transform='rotate(-5 1178 656)'/%3E%3C!-- Ear left --%3E%3Cpolygon points='1138,626 1128,608 1148,612'/%3E%3C!-- Ear right --%3E%3Cpolygon points='1158,622 1150,604 1168,610'/%3E%3C!-- Tail — curved arc upward --%3E%3Cpath d='M938,672 Q890,640 875,600 Q865,572 880,555 Q892,542 905,558' stroke='%231a1a1a' stroke-width='9' fill='none' stroke-linecap='round'/%3E%3C!-- Front legs --%3E%3Crect x='1115' y='700' width='14' height='45' rx='7' transform='rotate(5 1115 700)'/%3E%3Crect x='1135' y='702' width='14' height='43' rx='7' transform='rotate(8 1135 702)'/%3E%3C!-- Back legs --%3E%3Crect x='970' y='695' width='14' height='42' rx='7' transform='rotate(-5 970 695)'/%3E%3Crect x='992' y='698' width='14' height='40' rx='7' transform='rotate(-2 992 698)'/%3E%3C!-- Shoulder hump --%3E%3Cellipse cx='1090' cy='648' rx='28' ry='18' transform='rotate(-10 1090 648)'/%3E%3C/g%3E%3C!-- Scattered small leaves mid-page --%3E%3Cpath d='M700,15 C720,5 748,18 742,42 C738,55 722,60 712,53 C706,48 708,41 718,38 C730,34 738,26 734,16 C730,6 714,3 706,9 C698,15 688,12 700,15Z' fill='%231a1a1a' opacity='0.04'/%3E%3Cpath d='M720,440 C745,428 775,444 768,472 C763,488 744,494 732,486 C724,480 727,470 740,466 C756,461 765,450 760,437 C755,424 736,420 726,428 C716,436 702,432 720,440Z' fill='%231a1a1a' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+
+  /* ── Elegant button ── */
+  .btn-elegant {
+    display: inline-block;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    padding: 0.875rem 2rem;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s ease;
+    box-shadow: 3px 3px 0px #F4A0B5;
+  }
+
+  .btn-elegant:hover {
+    background-color: #F4A0B5;
+    color: #0A0A0A;
+    box-shadow: 3px 3px 0px #0A0A0A;
+  }
+
+  .btn-elegant:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ── Legacy classes re-styled ── */
   .btn-primary {
-    @apply bg-rose-gold text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-200 hover:bg-rose-gold-dark hover:shadow-soft-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 3px 3px 0px #F4A0B5;
+  }
+
+  .btn-primary:hover {
+    background-color: #F4A0B5;
+    color: #0A0A0A;
+    box-shadow: 3px 3px 0px #0A0A0A;
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 
   .btn-outline {
-    @apply border border-rose-gold text-rose-gold px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-200 hover:bg-rose-gold hover:text-white active:scale-95;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #0A0A0A;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    border: 1px solid #0A0A0A;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-outline:hover {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-soft border border-gray-50 p-6;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid rgba(244, 160, 181, 0.2);
+    padding: 1.5rem;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-rose-gold/30 focus:border-rose-gold transition-all duration-200 text-sm bg-white;
+    width: 100%;
+    padding: 0.625rem 0;
+    border: none;
+    border-bottom: 1px solid #0A0A0A;
+    background: transparent;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 300;
+    font-size: 0.875rem;
+    color: #0A0A0A;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.2s ease;
+  }
+
+  .input-field:focus {
+    border-bottom-color: #F4A0B5;
+  }
+
+  .input-field::placeholder {
+    color: #aaa;
+    font-weight: 300;
   }
 
   .step-indicator {
-    @apply flex items-center justify-center w-8 h-8 rounded-full text-xs font-semibold transition-all duration-300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
 }
 
 @layer utilities {
   .text-rose-gold {
-    color: #b76e79;
+    color: #F4A0B5;
   }
 
   .bg-rose-gold {
-    background-color: #b76e79;
+    background-color: #F4A0B5;
   }
 
   .border-rose-gold {
-    border-color: #b76e79;
+    border-color: #F4A0B5;
   }
 
   .ring-rose-gold {
-    --tw-ring-color: #b76e79;
+    --tw-ring-color: #F4A0B5;
+  }
+
+  .font-serif-italic {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
